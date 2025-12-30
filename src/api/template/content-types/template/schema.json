@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "templates",
+  "info": {
+    "singularName": "template",
+    "pluralName": "templates",
+    "displayName": "template",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "template": {
+      "type": "richtext"
+    },
+    "json": {
+      "type": "json"
+    },
+    "html_element": {
+      "type": "richtext"
+    }
+  }
+}

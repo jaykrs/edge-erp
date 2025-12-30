@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vendorsupports",
+  "info": {
+    "singularName": "vendorsupport",
+    "pluralName": "vendorsupports",
+    "displayName": "vendorsupport"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ticketname": {
+      "type": "string"
+    },
+    "vendoruuid": {
+      "type": "string"
+    },
+    "ticketdesc": {
+      "type": "text"
+    },
+    "reporteremail": {
+      "type": "string"
+    },
+    "reporterphone": {
+      "type": "string"
+    },
+    "attachment": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "closed": {
+      "type": "boolean"
+    },
+    "createdate": {
+      "type": "date"
+    },
+    "ticketworkflow": {
+      "type": "json"
+    },
+    "ticketcomment": {
+      "type": "richtext"
+    }
+  }
+}

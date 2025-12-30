@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vendoritems",
+  "info": {
+    "singularName": "vendoritem",
+    "pluralName": "vendoritems",
+    "displayName": "vendoritem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "vendoruuid": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "warranty": {
+      "type": "string"
+    },
+    "expirydt": {
+      "type": "date"
+    },
+    "manual": {
+      "type": "richtext"
+    },
+    "page": {
+      "type": "string"
+    },
+    "cost": {
+      "type": "integer"
+    },
+    "origin": {
+      "type": "string"
+    }
+  }
+}

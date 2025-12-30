@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pages",
+  "info": {
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "vendoruuid": {
+      "type": "string"
+    },
+    "pagepath": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "headerfooterid": {
+      "type": "string"
+    },
+    "seo": {
+      "type": "richtext"
+    },
+    "metadata": {
+      "type": "richtext"
+    },
+    "css": {
+      "type": "string"
+    },
+    "pagecss": {
+      "type": "richtext"
+    },
+    "pagejs": {
+      "type": "richtext"
+    },
+    "page_html_body": {
+      "type": "richtext"
+    },
+    "page_html_hero": {
+      "type": "richtext"
+    },
+    "page_html_promo": {
+      "type": "richtext"
+    },
+    "published": {
+      "type": "boolean"
+    },
+    "page_html_menu": {
+      "type": "richtext"
+    },
+    "menu": {
+      "type": "string"
+    }
+  }
+}

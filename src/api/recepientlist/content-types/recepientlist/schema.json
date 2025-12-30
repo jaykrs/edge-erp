@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recepientlists",
+  "info": {
+    "singularName": "recepientlist",
+    "pluralName": "recepientlists",
+    "displayName": "recepientlist"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "vendoruuid": {
+      "type": "string"
+    },
+    "collection": {
+      "type": "json"
+    },
+    "kekyword": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
+    }
+  }
+}

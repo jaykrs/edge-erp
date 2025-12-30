@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vendors",
+  "info": {
+    "singularName": "vendor",
+    "pluralName": "vendors",
+    "displayName": "vendor"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "vendorid": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "specialization": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "enrollmentCount": {
+      "type": "integer"
+    },
+    "ownerName": {
+      "type": "string"
+    },
+    "ownerEmail": {
+      "type": "string"
+    },
+    "details": {
+      "type": "richtext"
+    },
+    "remarks": {
+      "type": "blocks"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "gstin": {
+      "type": "string"
+    },
+    "bankDetails": {
+      "type": "string"
+    },
+    "vendoruuid": {
+      "type": "uid",
+      "targetField": "vendorid"
+    }
+  }
+}

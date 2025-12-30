@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "headerfooters",
+  "info": {
+    "singularName": "headerfooter",
+    "pluralName": "headerfooters",
+    "displayName": "headerfooter"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "published": {
+      "type": "boolean"
+    },
+    "author": {
+      "type": "string"
+    },
+    "header_html_element": {
+      "type": "richtext"
+    },
+    "footer_html_element": {
+      "type": "richtext"
+    },
+    "header_footer_json": {
+      "type": "blocks"
+    },
+    "clientsidelibs": {
+      "type": "string"
+    }
+  }
+}

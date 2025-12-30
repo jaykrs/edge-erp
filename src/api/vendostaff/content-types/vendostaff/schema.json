@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vendostaffs",
+  "info": {
+    "singularName": "vendostaff",
+    "pluralName": "vendostaffs",
+    "displayName": "vendostaff",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "vendoruuid": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "skills": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "smedia": {
+      "type": "json"
+    },
+    "certification": {
+      "type": "string"
+    },
+    "qualification": {
+      "type": "string"
+    },
+    "staffType": {
+      "type": "string"
+    },
+    "avatar": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "payroll": {
+      "type": "json"
+    },
+    "feedback": {
+      "type": "blocks"
+    },
+    "bankDetails": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "string"
+    },
+    "biography": {
+      "type": "richtext"
+    }
+  }
+}

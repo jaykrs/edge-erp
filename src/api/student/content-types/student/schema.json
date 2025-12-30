@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "students",
+  "info": {
+    "singularName": "student",
+    "pluralName": "students",
+    "displayName": "student"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "vendoruuid": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "skills": {
+      "type": "blocks"
+    },
+    "qualification": {
+      "type": "string"
+    },
+    "avatar": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "remarks": {
+      "type": "richtext"
+    },
+    "address": {
+      "type": "string"
+    },
+    "smedia": {
+      "type": "blocks"
+    },
+    "paymentSummery": {
+      "type": "blocks"
+    },
+    "courses": {
+      "type": "string"
+    },
+    "subscribeDomain": {
+      "type": "string"
+    },
+    "dob": {
+      "type": "date"
+    },
+    "biography": {
+      "type": "richtext"
+    }
+  }
+}
