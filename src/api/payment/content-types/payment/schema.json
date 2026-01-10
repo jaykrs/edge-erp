@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "payments",
+  "info": {
+    "singularName": "payment",
+    "pluralName": "payments",
+    "displayName": "payment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "vendorId": {
+      "type": "string"
+    },
+    "invoiceid": {
+      "type": "string"
+    },
+    "studentid": {
+      "type": "string"
+    },
+    "customerid": {
+      "type": "string"
+    },
+    "from": {
+      "type": "enumeration",
+      "enum": [
+        "student",
+        "customer",
+        "vendor",
+        "other"
+      ]
+    },
+    "product": {
+      "type": "string"
+    },
+    "price": {
+      "type": "string"
+    },
+    "tax": {
+      "type": "string"
+    },
+    "method": {
+      "type": "enumeration",
+      "enum": [
+        "online",
+        "offline",
+        "other"
+      ]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "unpaid",
+        "paid",
+        "process"
+      ]
+    }
+  }
+}

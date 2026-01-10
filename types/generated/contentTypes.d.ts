@@ -722,6 +722,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
+    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -744,17 +745,12 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     resetPasswordToken: Attribute.String & Attribute.Private;
     confirmationToken: Attribute.String & Attribute.Private;
     confirmed: Attribute.Boolean & Attribute.DefaultTo<false>;
-    blocked: Attribute.Boolean &
-      Attribute.Configurable &
-      Attribute.DefaultTo<true>;
+    blocked: Attribute.Boolean & Attribute.DefaultTo<false>;
     role: Attribute.Relation<
       'plugin::users-permissions.user',
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    usertype: Attribute.String;
-    otp: Attribute.BigInteger;
-    phoneOtp: Attribute.BigInteger;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -765,379 +761,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::users-permissions.user',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiAssesmentAssesment extends Schema.CollectionType {
-  collectionName: 'assesments';
-  info: {
-    singularName: 'assesment';
-    pluralName: 'assesments';
-    displayName: 'assesment';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    assesment_title: Attribute.Text;
-    assesment_description: Attribute.Text;
-    assesment_marks: Attribute.Integer;
-    author: Attribute.String;
-    course: Attribute.String;
-    passmarks: Attribute.Integer;
-    assesment_attachment: Attribute.String;
-    isactive: Attribute.Boolean & Attribute.DefaultTo<false>;
-    instructor: Attribute.String;
-    course_title: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::assesment.assesment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::assesment.assesment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiAssesmentquestionAssesmentquestion
-  extends Schema.CollectionType {
-  collectionName: 'assesmentquestions';
-  info: {
-    singularName: 'assesmentquestion';
-    pluralName: 'assesmentquestions';
-    displayName: 'assesmentquestion';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    assesment_id: Attribute.Integer;
-    question_type: Attribute.String;
-    question_id: Attribute.Integer;
-    courseid: Attribute.String;
-    course_title: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::assesmentquestion.assesmentquestion',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::assesmentquestion.assesmentquestion',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiAssesmentreportAssesmentreport
-  extends Schema.CollectionType {
-  collectionName: 'assesmentreports';
-  info: {
-    singularName: 'assesmentreport';
-    pluralName: 'assesmentreports';
-    displayName: 'assesmentreport';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    customerid: Attribute.String;
-    assesment_id: Attribute.Integer;
-    marks: Attribute.Integer;
-    assesment_evalution_report: Attribute.JSON;
-    fullMarks: Attribute.Integer;
-    passMarks: Attribute.Integer;
-    qsid: Attribute.String;
-    courseid: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::assesmentreport.assesmentreport',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::assesmentreport.assesmentreport',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiAssetAsset extends Schema.CollectionType {
-  collectionName: 'assets';
-  info: {
-    singularName: 'asset';
-    pluralName: 'assets';
-    displayName: 'asset';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    filename: Attribute.String;
-    author: Attribute.String;
-    public: Attribute.Boolean;
-    vendoruuid: Attribute.String;
-    path: Attribute.String;
-    type: Attribute.String;
-    size: Attribute.Integer;
-    keyword: Attribute.String;
-    colloborator: Attribute.String;
-    cdnpath: Attribute.String;
-    expirydate: Attribute.Date;
-    assetuuid: Attribute.UID<'api::asset.asset', 'vendoruuid'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::asset.asset',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::asset.asset',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiChapterChapter extends Schema.CollectionType {
-  collectionName: 'chapters';
-  info: {
-    singularName: 'chapter';
-    pluralName: 'chapters';
-    displayName: 'chapter';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    chapter_title: Attribute.String;
-    chapter_brief: Attribute.RichText;
-    chapter_duration: Attribute.Integer;
-    chapter_content: Attribute.RichText;
-    chapter_resource: Attribute.String;
-    chapter_video: Attribute.String;
-    chapter_author: Attribute.String;
-    chapter_order: Attribute.Integer;
-    courseunitid: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::chapter.chapter',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::chapter.chapter',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiConfigConfig extends Schema.CollectionType {
-  collectionName: 'configs';
-  info: {
-    singularName: 'config';
-    pluralName: 'configs';
-    displayName: 'config';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    key: Attribute.String;
-    value: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::config.config',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::config.config',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiContactContact extends Schema.CollectionType {
-  collectionName: 'contacts';
-  info: {
-    singularName: 'contact';
-    pluralName: 'contacts';
-    displayName: 'contact';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    username: Attribute.String;
-    email: Attribute.Email;
-    phoneNo: Attribute.String;
-    country: Attribute.String;
-    address: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::contact.contact',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::contact.contact',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiCourseCourse extends Schema.CollectionType {
-  collectionName: 'courses';
-  info: {
-    singularName: 'course';
-    pluralName: 'courses';
-    displayName: 'course';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    course_title: Attribute.String;
-    course_brief: Attribute.RichText;
-    course_fee: Attribute.Integer & Attribute.DefaultTo<0>;
-    instructor: Attribute.String;
-    course_fee_premium: Attribute.Integer & Attribute.DefaultTo<0>;
-    language: Attribute.String;
-    introductory_video: Attribute.String;
-    metadata: Attribute.String;
-    duration: Attribute.Integer & Attribute.DefaultTo<0>;
-    course_logo: Attribute.String;
-    course_outline: Attribute.RichText;
-    enrollment_count: Attribute.Integer & Attribute.DefaultTo<0>;
-    instrucctorName: Attribute.String;
-    assesmentCount: Attribute.String;
-    course_requirement: Attribute.RichText;
-    course_testimonial: Attribute.RichText;
-    rating: Attribute.Integer;
-    reviewUserCount: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::course.course',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::course.course',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiCoursequeryCoursequery extends Schema.CollectionType {
-  collectionName: 'coursequeries';
-  info: {
-    singularName: 'coursequery';
-    pluralName: 'coursequeries';
-    displayName: 'coursequery';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    question_txt: Attribute.Text;
-    question_attachment: Attribute.String;
-    courseid: Attribute.String;
-    studentid: Attribute.String;
-    answer: Attribute.Text;
-    answer_attachment: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::coursequery.coursequery',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::coursequery.coursequery',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiCourseunitCourseunit extends Schema.CollectionType {
-  collectionName: 'courseunits';
-  info: {
-    singularName: 'courseunit';
-    pluralName: 'courseunits';
-    displayName: 'courseunit';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    unit_title: Attribute.String;
-    unit_brief: Attribute.RichText;
-    metadata: Attribute.String;
-    unit_introductory_video: Attribute.String;
-    unit_duration: Attribute.Integer;
-    courseid: Attribute.String;
-    course_unit_order: Attribute.Integer;
-    labproject: Attribute.RichText;
-    labproject_attachment: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::courseunit.courseunit',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::courseunit.courseunit',
       'oneToOne',
       'admin::user'
     > &
@@ -1153,20 +776,23 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     displayName: 'customer';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
-    customeremail: Attribute.String;
-    customername: Attribute.String;
-    customerphone: Attribute.String;
-    customeraddress: Attribute.String;
-    customercity: Attribute.String;
-    customercountry: Attribute.String;
-    customerremarks: Attribute.String;
-    dob: Attribute.Date;
-    attachments: Attribute.String;
+    name: Attribute.String;
+    email: Attribute.String;
+    phone: Attribute.String;
+    address: Attribute.String;
+    city: Attribute.String;
+    requirement: Attribute.Text;
+    callog: Attribute.JSON;
+    status: Attribute.Enumeration<
+      ['lead', 'proposal', 'rejected', 'opportunity', 'customer', 'other']
+    >;
+    vendorId: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::customer.customer',
       'oneToOne',
@@ -1182,112 +808,31 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
   };
 }
 
-export interface ApiCustomerenquiryCustomerenquiry
-  extends Schema.CollectionType {
-  collectionName: 'customerenquiries';
+export interface ApiDamDam extends Schema.CollectionType {
+  collectionName: 'dams';
   info: {
-    singularName: 'customerenquiry';
-    pluralName: 'customerenquiries';
-    displayName: 'customerenquiry';
+    singularName: 'dam';
+    pluralName: 'dams';
+    displayName: 'dam';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
-    customername: Attribute.String;
-    customeremail: Attribute.String;
-    customerphone: Attribute.String;
-    enquirydate: Attribute.Date;
-    enquirycountry: Attribute.String;
-    processedstatus: Attribute.String;
+    vendorId: Attribute.String;
+    filename: Attribute.String;
+    meta: Attribute.String;
     description: Attribute.Text;
-    attachment: Attribute.String;
-    answer: Attribute.RichText;
-    answer_attachment: Attribute.String;
-    sourceip: Attribute.String;
+    author: Attribute.String;
+    size: Attribute.String;
+    path: Attribute.String;
+    access: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::customerenquiry.customerenquiry',
-      'oneToOne',
-      'admin::user'
-    > &
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::dam.dam', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::customerenquiry.customerenquiry',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiEnrollmentEnrollment extends Schema.CollectionType {
-  collectionName: 'enrollments';
-  info: {
-    singularName: 'enrollment';
-    pluralName: 'enrollments';
-    displayName: 'enrollment';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    customeremail: Attribute.String;
-    course: Attribute.String;
-    enrollment_date: Attribute.String;
-    is_paid: Attribute.Enumeration<['standard', 'premium']>;
-    orderid: Attribute.String;
-    order_transaction: Attribute.String;
-    payment_status: Attribute.Boolean & Attribute.DefaultTo<false>;
-    amount: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::enrollment.enrollment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::enrollment.enrollment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiFeedbackFeedback extends Schema.CollectionType {
-  collectionName: 'feedbacks';
-  info: {
-    singularName: 'feedback';
-    pluralName: 'feedbacks';
-    displayName: 'feedback';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    customeremail: Attribute.String;
-    customername: Attribute.String;
-    enrollment: Attribute.String;
-    rating_score: Attribute.Integer;
-    feedback_text: Attribute.RichText;
-    metadata: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::feedback.feedback',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::feedback.feedback',
-      'oneToOne',
-      'admin::user'
-    > &
+    updatedBy: Attribute.Relation<'api::dam.dam', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -1328,56 +873,6 @@ export interface ApiHeaderfooterHeaderfooter extends Schema.CollectionType {
   };
 }
 
-export interface ApiInstructorInstructor extends Schema.CollectionType {
-  collectionName: 'instructors';
-  info: {
-    singularName: 'instructor';
-    pluralName: 'instructors';
-    displayName: 'instructor';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    display_name: Attribute.String;
-    instructoremail: Attribute.String;
-    qualification: Attribute.Enumeration<
-      [
-        'below_graduate',
-        'graduate',
-        'master',
-        'professional_graduate',
-        'phd',
-        'ca',
-        'technical_graduate'
-      ]
-    >;
-    introduction_brief: Attribute.RichText;
-    published_course_count: Attribute.Integer;
-    enrollment_student_count: Attribute.Integer;
-    average_rating: Attribute.Integer;
-    work_exp_yr: Attribute.Integer;
-    intro_video_url: Attribute.String;
-    copyright_hold: Attribute.String;
-    linkedin_url: Attribute.String;
-    education_institute: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::instructor.instructor',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::instructor.instructor',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiInvoiceInvoice extends Schema.CollectionType {
   collectionName: 'invoices';
   info: {
@@ -1411,120 +906,6 @@ export interface ApiInvoiceInvoice extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::invoice.invoice',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiJobpostJobpost extends Schema.CollectionType {
-  collectionName: 'jobposts';
-  info: {
-    singularName: 'jobpost';
-    pluralName: 'jobposts';
-    displayName: 'jobpost';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    organization_name: Attribute.String;
-    organization_url: Attribute.String;
-    post_title: Attribute.Text;
-    post_description: Attribute.RichText;
-    post_attachment: Attribute.String;
-    start_date: Attribute.Date;
-    end_date: Attribute.Date;
-    metadata: Attribute.String;
-    contact_person: Attribute.String;
-    comments: Attribute.RichText;
-    qualification_required: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::jobpost.jobpost',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::jobpost.jobpost',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiLabprojectLabproject extends Schema.CollectionType {
-  collectionName: 'labprojects';
-  info: {
-    singularName: 'labproject';
-    pluralName: 'labprojects';
-    displayName: 'labproject';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    customerid: Attribute.String;
-    courseid: Attribute.String;
-    unit: Attribute.String;
-    instructor: Attribute.String;
-    description: Attribute.RichText;
-    attachment: Attribute.String;
-    answer: Attribute.RichText;
-    answerattachment: Attribute.String;
-    status: Attribute.String;
-    marks: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::labproject.labproject',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::labproject.labproject',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiLearningprogressLearningprogress
-  extends Schema.CollectionType {
-  collectionName: 'learningprogresses';
-  info: {
-    singularName: 'learningprogress';
-    pluralName: 'learningprogresses';
-    displayName: 'learningprogress';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    enrollment: Attribute.String;
-    chapter: Attribute.String;
-    begin_time: Attribute.Date;
-    end_time: Attribute.Date;
-    status: Attribute.Enumeration<['start', 'ongoing', 'finish']>;
-    customeremail: Attribute.String;
-    courseid: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::learningprogress.learningprogress',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::learningprogress.learningprogress',
       'oneToOne',
       'admin::user'
     > &
@@ -1645,34 +1026,38 @@ export interface ApiPagemenuPagemenu extends Schema.CollectionType {
   };
 }
 
-export interface ApiPublicassetPublicasset extends Schema.CollectionType {
-  collectionName: 'publicassets';
+export interface ApiPaymentPayment extends Schema.CollectionType {
+  collectionName: 'payments';
   info: {
-    singularName: 'publicasset';
-    pluralName: 'publicassets';
-    displayName: 'publicasset';
+    singularName: 'payment';
+    pluralName: 'payments';
+    displayName: 'payment';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    filename: Attribute.String;
-    filepath: Attribute.String;
-    size: Attribute.Integer;
-    author: Attribute.String;
-    type: Attribute.String;
-    publicpath: Attribute.String;
+    vendorId: Attribute.String;
+    invoiceid: Attribute.String;
+    studentid: Attribute.String;
+    customerid: Attribute.String;
+    from: Attribute.Enumeration<['student', 'customer', 'vendor', 'other']>;
+    product: Attribute.String;
+    price: Attribute.String;
+    tax: Attribute.String;
+    method: Attribute.Enumeration<['online', 'offline', 'other']>;
+    status: Attribute.Enumeration<['unpaid', 'paid', 'process']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::publicasset.publicasset',
+      'api::payment.payment',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::publicasset.publicasset',
+      'api::payment.payment',
       'oneToOne',
       'admin::user'
     > &
@@ -1680,52 +1065,40 @@ export interface ApiPublicassetPublicasset extends Schema.CollectionType {
   };
 }
 
-export interface ApiQuestionQuestion extends Schema.CollectionType {
-  collectionName: 'questions';
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products';
   info: {
-    singularName: 'question';
-    pluralName: 'questions';
-    displayName: 'question';
+    singularName: 'product';
+    pluralName: 'products';
+    displayName: 'product';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
-    question_title: Attribute.Text;
-    question_attachment: Attribute.String;
-    option_a_text: Attribute.String;
-    option_a_attachment: Attribute.String;
-    option_a_is_answer: Attribute.Boolean & Attribute.DefaultTo<false>;
-    option_b: Attribute.String;
-    option_b_attachment: Attribute.String;
-    option_b_is_answer: Attribute.Boolean & Attribute.DefaultTo<false>;
-    option_c: Attribute.String;
-    option_c_attachment: Attribute.String;
-    option_c_is_answer: Attribute.Boolean & Attribute.DefaultTo<false>;
-    option_d: Attribute.String;
-    option_d_attachment: Attribute.String;
-    option_d_is_answer: Attribute.Boolean & Attribute.DefaultTo<false>;
-    option_e: Attribute.String;
-    option_e_attachment: Attribute.String;
-    option_e_is_answer: Attribute.Boolean & Attribute.DefaultTo<false>;
-    marks: Attribute.Integer;
-    suggestion_remarks: Attribute.String;
-    suggestion_attachment: Attribute.String;
-    metadata: Attribute.String;
-    assesment_id: Attribute.String;
-    questiontype: Attribute.String;
-    courseid: Attribute.String;
-    course_title: Attribute.String;
+    vendorId: Attribute.String;
+    name: Attribute.String;
+    type: Attribute.Enumeration<['physical', 'digital']>;
+    description: Attribute.Text;
+    image: Attribute.String;
+    price: Attribute.Integer;
+    tax: Attribute.Decimal;
+    taxamt: Attribute.Integer;
+    brand: Attribute.String;
+    inventory: Attribute.Integer;
+    total: Attribute.Integer;
+    provider: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::question.question',
+      'api::product.product',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::question.question',
+      'api::product.product',
       'oneToOne',
       'admin::user'
     > &
@@ -1760,44 +1133,6 @@ export interface ApiRecepientlistRecepientlist extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::recepientlist.recepientlist',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiScoreScore extends Schema.CollectionType {
-  collectionName: 'scores';
-  info: {
-    singularName: 'score';
-    pluralName: 'scores';
-    displayName: 'score';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    customeremail: Attribute.Email;
-    customerAnswer: Attribute.Text;
-    instructor: Attribute.String;
-    courseid: Attribute.String;
-    assesmentid: Attribute.String;
-    totalScored: Attribute.Integer & Attribute.DefaultTo<0>;
-    passMarks: Attribute.Integer & Attribute.DefaultTo<0>;
-    fullMarks: Attribute.Integer & Attribute.DefaultTo<0>;
-    assesment_title: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::score.score',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::score.score',
       'oneToOne',
       'admin::user'
     > &
@@ -1846,37 +1181,6 @@ export interface ApiStudentStudent extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTaskTask extends Schema.CollectionType {
-  collectionName: 'tasks';
-  info: {
-    singularName: 'task';
-    pluralName: 'tasks';
-    displayName: 'task';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    vendoruuid: Attribute.String;
-    assignedto: Attribute.String;
-    taskdescription: Attribute.RichText;
-    status: Attribute.String;
-    keyword: Attribute.String;
-    author: Attribute.String;
-    completed: Attribute.Boolean;
-    startdt: Attribute.Date;
-    enddt: Attribute.Date;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -2105,35 +1409,17 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::assesment.assesment': ApiAssesmentAssesment;
-      'api::assesmentquestion.assesmentquestion': ApiAssesmentquestionAssesmentquestion;
-      'api::assesmentreport.assesmentreport': ApiAssesmentreportAssesmentreport;
-      'api::asset.asset': ApiAssetAsset;
-      'api::chapter.chapter': ApiChapterChapter;
-      'api::config.config': ApiConfigConfig;
-      'api::contact.contact': ApiContactContact;
-      'api::course.course': ApiCourseCourse;
-      'api::coursequery.coursequery': ApiCoursequeryCoursequery;
-      'api::courseunit.courseunit': ApiCourseunitCourseunit;
       'api::customer.customer': ApiCustomerCustomer;
-      'api::customerenquiry.customerenquiry': ApiCustomerenquiryCustomerenquiry;
-      'api::enrollment.enrollment': ApiEnrollmentEnrollment;
-      'api::feedback.feedback': ApiFeedbackFeedback;
+      'api::dam.dam': ApiDamDam;
       'api::headerfooter.headerfooter': ApiHeaderfooterHeaderfooter;
-      'api::instructor.instructor': ApiInstructorInstructor;
       'api::invoice.invoice': ApiInvoiceInvoice;
-      'api::jobpost.jobpost': ApiJobpostJobpost;
-      'api::labproject.labproject': ApiLabprojectLabproject;
-      'api::learningprogress.learningprogress': ApiLearningprogressLearningprogress;
       'api::order.order': ApiOrderOrder;
       'api::page.page': ApiPagePage;
       'api::pagemenu.pagemenu': ApiPagemenuPagemenu;
-      'api::publicasset.publicasset': ApiPublicassetPublicasset;
-      'api::question.question': ApiQuestionQuestion;
+      'api::payment.payment': ApiPaymentPayment;
+      'api::product.product': ApiProductProduct;
       'api::recepientlist.recepientlist': ApiRecepientlistRecepientlist;
-      'api::score.score': ApiScoreScore;
       'api::student.student': ApiStudentStudent;
-      'api::task.task': ApiTaskTask;
       'api::template.template': ApiTemplateTemplate;
       'api::vendor.vendor': ApiVendorVendor;
       'api::vendoritem.vendoritem': ApiVendoritemVendoritem;

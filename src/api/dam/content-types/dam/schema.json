@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dams",
+  "info": {
+    "singularName": "dam",
+    "pluralName": "dams",
+    "displayName": "dam"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "vendorId": {
+      "type": "string"
+    },
+    "filename": {
+      "type": "string"
+    },
+    "meta": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "author": {
+      "type": "string"
+    },
+    "size": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "access": {
+      "type": "text"
+    }
+  }
+}
