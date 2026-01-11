@@ -23,6 +23,9 @@
     },
     "html_element": {
       "type": "richtext"
+    },
+    "type": {
+      "type": "string"
     }
   }
 }

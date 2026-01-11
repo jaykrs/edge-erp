@@ -1201,6 +1201,7 @@ export interface ApiTemplateTemplate extends Schema.CollectionType {
     template: Attribute.RichText;
     json: Attribute.JSON;
     html_element: Attribute.RichText;
+    type: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
