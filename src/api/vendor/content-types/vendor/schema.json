@@ -59,6 +59,9 @@
     "gstin": {
       "type": "string"
     },
+    "ftp": {
+      "type": "string"
+    },
     "bankDetails": {
       "type": "string"
     },
