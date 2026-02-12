@@ -4,7 +4,8 @@
   "info": {
     "singularName": "student",
     "pluralName": "students",
-    "displayName": "student"
+    "displayName": "student",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -58,6 +59,39 @@
     },
     "biography": {
       "type": "richtext"
+    },
+    "studentid": {
+      "type": "string"
+    },
+    "registrationdt": {
+      "type": "date"
+    },
+    "reregistrationdt": {
+      "type": "date"
+    },
+    "parentdetails": {
+      "type": "string"
+    },
+    "idtype": {
+      "type": "string"
+    },
+    "idnumber": {
+      "type": "string"
+    },
+    "shifttime": {
+      "type": "string"
+    },
+    "regfee": {
+      "type": "string"
+    },
+    "monthfee": {
+      "type": "string"
+    },
+    "lockerdetails": {
+      "type": "string"
+    },
+    "alternatephone": {
+      "type": "string"
     }
   }
 }

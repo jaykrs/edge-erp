@@ -4,7 +4,8 @@
   "info": {
     "singularName": "vendoritem",
     "pluralName": "vendoritems",
-    "displayName": "vendoritem"
+    "displayName": "vendoritem",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -40,6 +41,11 @@
     },
     "origin": {
       "type": "string"
+    },
+    "working": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }
