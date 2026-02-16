@@ -96,6 +96,9 @@
     "attandance": {
       "type": "string"
     },
+     "dam": {
+      "type": "string"
+    },
     "alternatephone": {
       "type": "string"
     }
