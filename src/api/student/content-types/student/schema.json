@@ -90,6 +90,12 @@
     "lockerdetails": {
       "type": "string"
     },
+    "seatdetails": {
+      "type": "string"
+    },
+    "attandance": {
+      "type": "string"
+    },
     "alternatephone": {
       "type": "string"
     }
