@@ -94,7 +94,7 @@
       "type": "string"
     },
     "attandance": {
-      "type": "string"
+      "type": "json"
     },
      "dam": {
       "type": "string"
