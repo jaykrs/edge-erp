@@ -50,6 +50,9 @@
     },
     "transactionid": {
       "type": "string"
+    },
+    "vendorId": {
+      "type": "string"
     }
   }
 }
