@@ -39,6 +39,9 @@
     "cost": {
       "type": "integer"
     },
+    "count": {
+      "type": "integer"
+    },
     "origin": {
       "type": "string"
     },
