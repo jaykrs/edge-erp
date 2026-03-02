@@ -31,6 +31,9 @@
     },
     "clientsidelibs": {
       "type": "string"
+    },
+    "vendoruuid": {
+      "type": "string"
     }
   }
 }
