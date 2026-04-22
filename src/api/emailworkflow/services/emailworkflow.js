@@ -43,26 +43,49 @@ module.exports = createCoreService('api::emailworkflow.emailworkflow', ({ strapi
                 throw new Error('Recipient list is empty or invalid.');
             }
 
+            // Ensure recipients are strings for type safety
+            const recipientEmails = recipients.filter(r => typeof r === 'string');
+
             // 4. Merge Template
             let htmlContent = template.html_element || '';
+            let baseSubject = workflow.name || '';
             const jsonData = template.json || {};
 
-            // Replace ${key} with values from json
-            Object.keys(jsonData).forEach(key => {
-                const regex = new RegExp(`\\$\\{${key}\\}`, 'g');
-                htmlContent = htmlContent.replace(regex, jsonData[key]);
-            });
+            // Replace $key with values from json
+            // Sort keys by length descending to prevent partial replacement (e.g., $llm-intro before $llm)
+            Object.keys(jsonData)
+                .sort((a, b) => b.length - a.length)
+                .forEach(key => {
+                    const regex = new RegExp(`\\$${key}`, 'g');
+                    htmlContent = htmlContent.replace(regex, String(jsonData[key]));
+                    baseSubject = baseSubject.replace(regex, String(jsonData[key]));
+                });
 
-            // 5. Send Emails via Mailjet
-            const messages = recipients.map(email => ({
-                From: {
-                    Email: process.env.MAIL_FROM || 'jaykrs@gmail.com',
-                    Name: process.env.BRAND_NAME || 'eazysupplies.com'
-                },
-                To: [{ Email: email }],
-                Subject: workflow.name,
-                HTMLPart: htmlContent
-            }));
+            // 5. Fetch Student Names for Dynamic Replacement
+            const students = await strapi.entityService.findMany('api::student.student', {
+                filters: { email: { $in: recipientEmails } }
+            });
+            const studentMap = (students || []).reduce((acc, student) => {
+                acc[student.email] = student.name;
+                return acc;
+            }, {});
+
+            // 6. Send Emails via Mailjet
+            const messages = recipientEmails.map(email => {
+                const studentName = studentMap[email] || email; // Fallback to email if name not found
+                const personalizedHtml = htmlContent.replace(/\$user_username/g, studentName);
+                const personalizedSubject = baseSubject.replace(/\$user_username/g, studentName);
+
+                return {
+                    From: {
+                        Email: 'edgeapp@teqtoeducation.com',
+                        Name: 'edgeapp'
+                    },
+                    To: [{ Email: email }],
+                    Subject: personalizedSubject,
+                    HTMLPart: personalizedHtml
+                };
+            });
 
             const result = await mailjet.post("send", { version: 'v3.1' }).request({
                 Messages: messages
@@ -70,7 +93,7 @@ module.exports = createCoreService('api::emailworkflow.emailworkflow', ({ strapi
 
             strapi.log.debug(`Mailjet response: ${JSON.stringify(result.body)}`);
 
-            // 6. Update Workflow Status
+            // 7. Update Workflow Status
             const responseBody = result.body || {};
             const messagesList = responseBody['Messages'] || [];
             const executionlog = (Array.isArray(messagesList) ? messagesList : []).map(msg => ({
